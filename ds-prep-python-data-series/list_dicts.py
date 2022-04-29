@@ -118,28 +118,23 @@ print("---")
 
 # Create a new series, in the same format as the original, with the
 # "employment rate" instead of the "unemployment rate" (the rates are listed in
-# percentages).
-def employment_rate(data_series):
-  years_list = [] ## define a years_list
-  ue_rates_list = [] ## define an ue rates list
-  e_rates_list = [] ## define an e rates list
-  merged_list = []
-  for x in data_series: ## run a loop to isolate each row
-    years_list.append(x['year']) ## append years values to the years_list
-    ue_rates_list.append(x['unemployment_rate']) ## append unemployment rate values to the rates list
-  for x in ue_rates_list: ## calculate a list that's the inverse of rates list
-    e_rates_list.append(100 - x)
-  years_keys = ['year' for i in range(len(years_list))] ## generate a list of year keys that's the correct length
-  e_rates_keys = ['employment_rate' for i in range(len(e_rates_list))] ## generate a list of e rate keys that's the correct length
-  for i in range(len(years_list)):
-    merged_list.append(dict(years_key = years_list, e_rates_keys = e_rates_list))
-  return merged_list
-  ## create a dictionary for each individual row
-  ## append each row into a list
-  ## return the list
 
-print(employment_rate(unemployment_rates)) ## print
-print("---")
+def employment_rate(data_series):
+  years_list = [] # define a years list
+  e_rates_list = [] # # define a e rate list
+  emp_rates_list_of_dicts = []
+  for x in data_series: # run a loop
+    years_list.append(x['year']) # append the years to the years list
+    e_rates_list.append(100 - x['unemployment_rate']) # isolate the ue rate, append e rate to erate list
+  for i in range(0,len(e_rates_list)):# run loops
+    new_dict = {}
+    new_dict['employment_rate'] = e_rates_list[i] # create the rows as dictionaries
+    new_dict['year'] = years_list[i]
+    emp_rates_list_of_dicts.append(new_dict)# append them to the list
+  return emp_rates_list_of_dicts
+
+print(employment_rate(unemployment_rates))
+
 
 # Create a new series, in the same format as the original, but only containing
 # the series points where the unemployment rate is at least 7.

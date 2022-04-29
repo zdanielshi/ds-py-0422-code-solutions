@@ -48,7 +48,7 @@ print("---")
 # Get the first five series points, in the order they appear, as a list of
 # tuples.
 def first_five_series_points(series):
-  return series[0:4]
+  return series[0:5]
 
 print(first_five_series_points(unemployment_rates))
 print("---")
@@ -68,8 +68,9 @@ print("---")
 # Get the unemployment rate for the most recent year.
 
 def ue_rate(data_series):
-  data_series.sort()
-  year_data = data_series[-1]
+  new_list = data_series.copy()
+  new_list.sort()
+  year_data = new_list[-1]
   return year_data[1]
 
 print(ue_rate(unemployment_rates))
